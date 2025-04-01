@@ -27,10 +27,10 @@
     </tr>
     <tr>
         <td>
-            array $optionFields = [ ]; <br>
+            public array $optionFields = [ ]; <br>
             &nbsp;&nbsp; *in it, list the fields that you want to use for the option.  <br>
             <br>
-            array $optionCasts = [ <br>
+            public array $optionCasts = [ <br>
             &nbsp;&nbsp; '{nameField}' => 'array', <br>
             &nbsp;&nbsp; '{nameField}' => 'boolean', <br>
             &nbsp;&nbsp; '{nameField}' => 'int', <br>
@@ -89,10 +89,10 @@
     </tr>
     <tr>
         <td>
-            array $toggleFields = [ ]; <br>
+            public array $toggleFields = [ ]; <br>
             &nbsp;&nbsp; *in it, list the fields that you want to use for the option.  <br>
             <br>
-            array $optionCasts = [ <br>
+            public array $optionCasts = [ <br>
             &nbsp;&nbsp; '{nameField}' => 'array', <br>
             &nbsp;&nbsp; '{nameField}' => 'boolean', <br>
             &nbsp;&nbsp; '{nameField}' => 'int', <br>

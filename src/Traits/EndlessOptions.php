@@ -24,10 +24,10 @@ use Illuminate\Database\Eloquent\Model;
  |  add properties in model                                                  |  add properties in model                                                  |
  |---------------------------------------------------------------------------|---------------------------------------------------------------------------|
  |                                                                           |                                                                           |
- |   array $optionFields = [];                                               |   array $toggleFields = [];                                               |
+ |   public array $optionFields = [];                                        |   public array $toggleFields = [];                                        |
  |     *in it, list the fields that you want to use for the option.          |     *in it, list the fields that you want to use for the Boolean option.  |
  |-------------------------------------------------------------------------------------------------------------------------------------------------------|
- |                                                                  array $optionCasts = [                                                               |
+ |                                                                  public array $optionCasts = [                                                        |
  |                                                                         '{nameField}' => 'array',                                                     |
  |                                                                         '{nameField}' => 'boolean',                                                   |
  |                                                                         '{nameField}' => 'int',                                                       |
