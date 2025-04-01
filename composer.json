@@ -1,0 +1,21 @@
+{
+    "name": "lnext/endless-options",
+    "description": "A package for expands the model's capabilities in Laravel",
+    "type": "library",
+    "require": {
+        "php": "^8.0",
+        "laravel/framework": "^9|^10|^11|^12"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Lnext\\EndlessOptions\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Skorilkin Aleksey",
+            "email": "own@lnext.space"
+        }
+    ]
+}

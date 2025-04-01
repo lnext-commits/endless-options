@@ -1,0 +1,127 @@
+# Endless options fot model
+
+### what needs to be done for implementation
+
+<hr style="height:4px; width: 700px;">
+<table>
+    <tr>
+        <th>To create mixed options</th>
+    </tr>
+    <tr>
+        <td>create table in DB for option</td>
+    </tr>
+    <tr>
+        <td>
+            Schema::create('{nameOptionTable}', function (Blueprint $table) { <br>
+            &nbsp;&nbsp; $table->id();<br>
+            &nbsp;&nbsp; $table->unsignedInteger('{nameField}');<br>
+            &nbsp;&nbsp; $table->string('name');   <br>
+            &nbsp;&nbsp; $table->string('value')->nullable(); <br>
+            &nbsp;&nbsp; $table->foreign('{NameField}')->references('id')->on('{nameTable}'); <br>
+            });<br><br>
+            Create model {nameOptionTable} for this table   
+        </td>
+    </tr>
+    <tr>
+        <td>add properties in model</td>
+    </tr>
+    <tr>
+        <td>
+            array $optionFields = [ ]; <br>
+            &nbsp;&nbsp; *in it, list the fields that you want to use for the option.  <br>
+            <br>
+            array $optionCasts = [ <br>
+            &nbsp;&nbsp; '{nameField}' => 'array', <br>
+            &nbsp;&nbsp; '{nameField}' => 'boolean', <br>
+            &nbsp;&nbsp; '{nameField}' => 'int', <br>
+            ];  <br>
+            &nbsp; *it sets the types to be reduced to. <br>
+            &nbsp; **supported types <br>
+            &nbsp; ***the property is optional  <br>
+        </td>
+    </tr>
+    <tr>
+        <td>add a relation in model</td>
+    </tr>
+    <tr>
+        <td>
+            public function options(): HasMany <br>
+            { <br>
+            &nbsp;&nbsp; return $this->hasMany({NameModelOptionTable}::class);  <br>
+            } <br>
+        </td>
+    </tr> 
+    <tr>
+        <td>add properties for permanent loading </td>
+    </tr>
+    <tr>
+        <td>
+            protected $with = [  <br>
+            &nbsp;&nbsp; 'options', <br>
+            ];
+        </td>
+    </tr>
+</table>
+
+<hr style="height:4px; width: 700px;">
+
+<table>
+    <tr>
+        <th>To create boolean options </th>
+    </tr>
+    <tr>
+        <td>create table in DB for toggle option</td>
+    </tr>
+    <tr>
+        <td>
+            Schema::create('{nameOptionTable}', function (Blueprint $table) { <br>
+            &nbsp;&nbsp; $table->id();<br>
+            &nbsp;&nbsp; $table->unsignedInteger('{nameField}');<br>
+            &nbsp;&nbsp; $table->string('name');   <br>
+            &nbsp;&nbsp; $table->boolean('value')->default(1)->nullable();  <br>
+            &nbsp;&nbsp; $table->foreign('{NameField}')->references('id')->on('{nameTable}'); <br>
+            });<br><br>
+            Create model {nameOptionTable} for this table   
+        </td>
+    </tr>
+    <tr>
+        <td>add properties in model</td>
+    </tr>
+    <tr>
+        <td>
+            array $toggleFields = [ ]; <br>
+            &nbsp;&nbsp; *in it, list the fields that you want to use for the option.  <br>
+            <br>
+            array $optionCasts = [ <br>
+            &nbsp;&nbsp; '{nameField}' => 'array', <br>
+            &nbsp;&nbsp; '{nameField}' => 'boolean', <br>
+            &nbsp;&nbsp; '{nameField}' => 'int', <br>
+            ];  <br>
+            &nbsp; *it sets the types to be reduced to. <br>
+            &nbsp; **supported types <br>
+            &nbsp; ***the property is optional  <br>
+        </td>
+    </tr>
+    <tr>
+        <td>add a relation in model</td>
+    </tr>
+    <tr>
+        <td>
+            public function booleanOptions(): HasMany <br>
+            { <br>
+            &nbsp;&nbsp; return $this->hasMany({NameModelOptionTable}::class);  <br>
+            } <br>
+        </td>
+    </tr> 
+    <tr>
+        <td>add properties for permanent loading </td>
+    </tr>
+    <tr>
+        <td>
+            protected $with = [  <br>
+            &nbsp;&nbsp; 'options', <br>
+            ];
+        </td>
+    </tr>
+</table>
+<hr style="height:4px; width: 700px;">
