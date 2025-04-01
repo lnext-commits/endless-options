@@ -2,7 +2,7 @@
 
 ### what needs to be done for implementation
 
-<hr style="height:4px; width: 700px;">
+<hr style="height:4px; width: 485px;">
 <table>
     <tr>
         <th>To create mixed options</th>
@@ -28,16 +28,16 @@
     <tr>
         <td>
             public array $optionFields = [ ]; <br>
-            &nbsp;&nbsp; *in it, list the fields that you want to use for the option.  <br>
+            &nbsp;&nbsp; <i>*in it, list the fields that you want to use for the option.</i>  <br>
             <br>
             public array $optionCasts = [ <br>
             &nbsp;&nbsp; '{nameField}' => 'array', <br>
             &nbsp;&nbsp; '{nameField}' => 'boolean', <br>
             &nbsp;&nbsp; '{nameField}' => 'int', <br>
             ];  <br>
-            &nbsp; *it sets the types to be reduced to. <br>
-            &nbsp; **supported types <br>
-            &nbsp; ***the property is optional  <br>
+            &nbsp; <i>*it sets the types to be reduced to.</i> <br>
+            &nbsp; <i>**supported types</i> <br>
+            &nbsp; <i>***the property is optional</i>  <br>
         </td>
     </tr>
     <tr>
@@ -63,7 +63,7 @@
     </tr>
 </table>
 
-<hr style="height:4px; width: 700px;">
+<hr style="height:4px; width: 485px;">
 
 <table>
     <tr>
@@ -90,16 +90,7 @@
     <tr>
         <td>
             public array $toggleFields = [ ]; <br>
-            &nbsp;&nbsp; *in it, list the fields that you want to use for the option.  <br>
-            <br>
-            public array $optionCasts = [ <br>
-            &nbsp;&nbsp; '{nameField}' => 'array', <br>
-            &nbsp;&nbsp; '{nameField}' => 'boolean', <br>
-            &nbsp;&nbsp; '{nameField}' => 'int', <br>
-            ];  <br>
-            &nbsp; *it sets the types to be reduced to. <br>
-            &nbsp; **supported types <br>
-            &nbsp; ***the property is optional  <br>
+            &nbsp;&nbsp; <i>*in it, list the fields that you want to use for the option.</i>  <br>
         </td>
     </tr>
     <tr>
@@ -119,7 +110,7 @@
     <tr>
         <td>
             protected $with = [  <br>
-            &nbsp;&nbsp; 'options', <br>
+            &nbsp;&nbsp; 'booleanOptions', <br>
             ];
         </td>
     </tr>

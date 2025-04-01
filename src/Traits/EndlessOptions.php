@@ -27,14 +27,14 @@ use Illuminate\Database\Eloquent\Model;
  |   public array $optionFields = [];                                        |   public array $toggleFields = [];                                        |
  |     *in it, list the fields that you want to use for the option.          |     *in it, list the fields that you want to use for the Boolean option.  |
  |-------------------------------------------------------------------------------------------------------------------------------------------------------|
- |                                                                  public array $optionCasts = [                                                        |
- |                                                                         '{nameField}' => 'array',                                                     |
- |                                                                         '{nameField}' => 'boolean',                                                   |
- |                                                                         '{nameField}' => 'int',                                                       |
- |                                                                    ];                                                                                 |
- |                                                                     *it sets the types to be reduced to.                                              |
- |                                                                    **supported types                                                                  |
- |                                                                   ***the property is optional                                                         |
+ |   public array $optionCasts = [                                           |                                                                           |
+ |     '{nameField}' => 'array',                                             |                                                                           |
+ |     '{nameField}' => 'boolean',                                           |                                                                           |
+ |     '{nameField}' => 'int',                                               |                                                                           |
+ |   ];                                                                      |                                                                           |
+ |      *it sets the types to be reduced to.                                 |                                                                           |
+ |      **supported types                                                    |                                                                           |
+ |      ***the property is optional                                          |                                                                           |
  |---------------------------------------------------------------------------|---------------------------------------------------------------------------|
  |  add a relation in model                                                  |  add a relation in model                                                  |
  |---------------------------------------------------------------------------|---------------------------------------------------------------------------|
