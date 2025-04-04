@@ -2,8 +2,6 @@
 
 namespace Lnext\EndlessOptions\Traits;
 
-use Illuminate\Database\Eloquent\Model;
-
 /*
  |===========================================================================|===========================================================================|
  |    To create mixed options                                                |     To create boolean options                                             |
@@ -54,6 +52,7 @@ use Illuminate\Database\Eloquent\Model;
 trait EndlessOptions
 {
     private array $afterCreation = [];
+    private array $afterUpdating = [];
 
     public static function boot(): void
     {
@@ -154,10 +153,14 @@ trait EndlessOptions
 
     private function setBooleanOption($field, bool $value): void
     {
+        $fromValue = $this->$field;
         if ($option = $this->booleanOptions->where('name', $field)->first()) {
-           $option->update(['value' => $value]);
+            $option->update(['value' => $value]);
         } else {
-           $this->booleanOptions()->create(['name' => $field, 'value' => $value]);
+            $this->booleanOptions()->create(['name' => $field, 'value' => $value]);
+        }
+        if ($fromValue != $this->$field) {
+            $this->changes = array_merge($this->changes, [$field => $fromValue]);
         }
     }
 
@@ -174,11 +177,14 @@ trait EndlessOptions
                 };
             }
         }
-
+        $fromValue = $this->$field;
         if ($option = $this->options->where('name', $field)->first()) {
             $option->update(['value' => $value]);
         } else {
             $this->options()->create(['name' => $field, 'value' => $value]);
+        }
+        if ($fromValue != $this->$field) {
+            $this->changes = array_merge($this->changes, [$field => $fromValue]);
         }
     }
 
