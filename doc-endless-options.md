@@ -2,6 +2,12 @@
 
 ### what needs to be done for implementation
 
+To get started, you need to connect the trait in the model
+```php
+ use EndlessOptions
+```
+and create the necessary relationships and tables in the database as described below
+
 <hr style="height:4px; width: 485px;">
 <table>
     <tr>
