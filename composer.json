@@ -9,7 +9,14 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Lnext\\EndlessOptions\\": "src"
+            "Lnext\\EndlessOptions\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Lnext\\EndlessOptions\\EndlessOptionProvider"
+            ]
         }
     },
     "authors": [

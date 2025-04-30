@@ -110,17 +110,17 @@ trait EndlessOptions
         }
     }
 
-    public function getToggleFields()
+    public function getToggleFields(): array
     {
         return $this->toggleFields ?? [];
     }
 
-    public function getOptionFields()
+    public function getOptionFields(): array
     {
         return $this->optionFields ?? [];
     }
 
-    public function getOptionCasts()
+    public function getOptionCasts(): array
     {
         return $this->optionCasts ?? [];
     }
