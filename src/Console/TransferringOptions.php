@@ -113,10 +113,12 @@ class TransferringOptions extends Command
         $modelClass = $this->model::class;
         foreach ($modelClass::all() as $item) {
             $value = $item->$field;
-            $item->$relation()->create([
-                'name' => $field,
-                'value' => $value
-            ]);
+            if (!is_null($value)) {
+                $item->$relation()->create([
+                    'name' => $field,
+                    'value' => $value
+                ]);
+            }
         }
         Schema::table($table, function (Blueprint $table) use ($field) {
             $table->dropColumn($field);
@@ -144,6 +146,7 @@ class TransferringOptions extends Command
                 'array' => 'json',
                 'int' => 'integer',
                 'boolean' => 'boolean',
+                'date' => 'dateTime',
                 default => 'string'
             };
         }

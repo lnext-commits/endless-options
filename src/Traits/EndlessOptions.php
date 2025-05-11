@@ -29,6 +29,7 @@ namespace Lnext\EndlessOptions\Traits;
  |     '{nameField}' => 'array',                                             |                                                                           |
  |     '{nameField}' => 'boolean',                                           |                                                                           |
  |     '{nameField}' => 'int',                                               |                                                                           |
+ |     '{nameField}' => 'date',                                              |                                                                           |
  |   ];                                                                      |                                                                           |
  |      *it sets the types to be reduced to.                                 |                                                                           |
  |      **supported types                                                    |                                                                           |
@@ -48,6 +49,8 @@ namespace Lnext\EndlessOptions\Traits;
  |   ];                                                                      |   ];                                                                      |
  |===========================================================================|===========================================================================|
 */
+
+use Carbon\Carbon;
 
 trait EndlessOptions
 {
@@ -143,6 +146,7 @@ trait EndlessOptions
                     'array' => json_decode($value, true),
                     'boolean' => (bool) $value,
                     'int' => (int) $value,
+                    'date' => Carbon::parse($value),
                     default => $value,
                 };
             }
