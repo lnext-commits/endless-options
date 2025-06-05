@@ -51,6 +51,7 @@ namespace Lnext\EndlessOptions\Traits;
 */
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 
 trait EndlessOptions
 {
@@ -128,6 +129,33 @@ trait EndlessOptions
         return $this->optionCasts ?? [];
     }
 
+    public function scopeWhereToggle(Builder $builder, string $name, bool $value = null)
+    {
+        return
+            $builder->whereHas('booleanOptions', function (Builder $q) use ($name, $value) {
+                $q->where('name', $name)
+                    ->where('value', $value);
+            });
+    }
+
+    public function scopeWhereOptions(Builder $builder, string $name, bool|int|string $ov, bool|int|string $v)
+    {
+        if (func_num_args() === 3) {
+            $operator = '=';
+            $value = $ov;
+        } elseif (!in_array($ov, $this->allowedOperators())) {
+            return $builder;
+        } else {
+            $operator = $ov;
+            $value = $v;
+        }
+        return
+            $builder->whereHas('options', function (Builder $q) use ($name, $operator, $value) {
+                $q->where('name', $name)
+                    ->where('value', $operator , $value);
+            });
+    }
+
     // --------- PRIVATE FUNCTION  --------------------------------------
 
     private function getBooleanOption($field): bool|null
@@ -199,6 +227,18 @@ trait EndlessOptions
             'mixed' => isset($this->optionFields) && in_array($key, $this->optionFields) && method_exists($this, 'options'),
             default => false
         };
+    }
+
+    private function allowedOperators(): array
+    {
+        return [
+            '=', '<', '>', '<=', '>=', '<>', '!=', '<=>',
+            'like', 'like binary', 'not like', 'ilike',
+            '&', '|', '^', '<<', '>>', '&~', 'is', 'is not',
+            'rlike', 'not rlike', 'regexp', 'not regexp',
+            '~', '~*', '!~', '!~*', 'similar to',
+            'not similar to', 'not ilike', '~~*', '!~~*',
+        ];
     }
 
 }
