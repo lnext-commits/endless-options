@@ -190,8 +190,9 @@ trait EndlessOptions
             $option->update(['value' => $value]);
         } else {
             $this->booleanOptions()->create(['name' => $field, 'value' => $value]);
+            $this->refresh();
         }
-        if ($fromValue != $this->$field) {
+        if ($fromValue !== $this->$field) {
             $this->changes = array_merge($this->changes, [$field => $fromValue]);
         }
     }

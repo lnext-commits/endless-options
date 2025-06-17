@@ -20,10 +20,10 @@ and create the necessary relationships and tables in the database as described b
         <td>
             Schema::create('{nameOptionTable}', function (Blueprint $table) { <br>
             &nbsp;&nbsp; $table->id();<br>
-            &nbsp;&nbsp; $table->unsignedInteger('{nameField}');<br>
+            &nbsp;&nbsp; $table->unsignedBigInteger('nameField');<br>
             &nbsp;&nbsp; $table->string('name');   <br>
             &nbsp;&nbsp; $table->string('value')->nullable(); <br>
-            &nbsp;&nbsp; $table->foreign('{NameField}')->references('id')->on('{nameTable}'); <br>
+            &nbsp;&nbsp; $table->foreign('NameField')->references('id')->on('nameTable'); <br>
             });<br><br>
             Create model {nameOptionTable} for this table   
         </td>
@@ -82,10 +82,10 @@ and create the necessary relationships and tables in the database as described b
         <td>
             Schema::create('{nameOptionTable}', function (Blueprint $table) { <br>
             &nbsp;&nbsp; $table->id();<br>
-            &nbsp;&nbsp; $table->unsignedInteger('{nameField}');<br>
+            &nbsp;&nbsp; $table->unsignedBigInteger('nameField');<br>
             &nbsp;&nbsp; $table->string('name');   <br>
             &nbsp;&nbsp; $table->boolean('value')->default(1)->nullable();  <br>
-            &nbsp;&nbsp; $table->foreign('{NameField}')->references('id')->on('{nameTable}'); <br>
+            &nbsp;&nbsp; $table->foreign('NameField')->references('id')->on('nameTable'); <br>
             });<br><br>
             Create model {nameOptionTable} for this table   
         </td>
