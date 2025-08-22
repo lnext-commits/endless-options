@@ -40,6 +40,7 @@ and create the necessary relationships and tables in the database as described b
             &nbsp;&nbsp; '{nameField}' => 'array', <br>
             &nbsp;&nbsp; '{nameField}' => 'boolean', <br>
             &nbsp;&nbsp; '{nameField}' => 'int', <br>
+            &nbsp;&nbsp; '{nameField}' => 'date', <br>
             ];  <br>
             &nbsp; <i>*it sets the types to be reduced to.</i> <br>
             &nbsp; <i>**supported types</i> <br>

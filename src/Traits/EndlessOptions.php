@@ -129,7 +129,7 @@ trait EndlessOptions
         return $this->optionCasts ?? [];
     }
 
-    public function scopeWhereToggle(Builder $builder, string $name, bool $value = null)
+    public function scopeWhereToggle(Builder $builder, string $name, bool $value = null): Builder
     {
         return
             $builder->whereHas('booleanOptions', function (Builder $q) use ($name, $value) {
@@ -138,7 +138,7 @@ trait EndlessOptions
             });
     }
 
-    public function scopeWhereOptions(Builder $builder, string $name, bool|int|string $ov, bool|int|string $v)
+    public function scopeWhereOptions(Builder $builder, string $name, bool|int|string $ov, bool|int|string $v): Builder
     {
         if (func_num_args() === 3) {
             $operator = '=';
@@ -215,8 +215,9 @@ trait EndlessOptions
             $option->update(['value' => $value]);
         } else {
             $this->options()->create(['name' => $field, 'value' => $value]);
+            $this->refresh();
         }
-        if ($fromValue != $this->$field) {
+        if ($fromValue !== $this->$field) {
             $this->changes = array_merge($this->changes, [$field => $fromValue]);
         }
     }
