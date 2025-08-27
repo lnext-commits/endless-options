@@ -104,7 +104,7 @@ class TransferringOptions extends Command
             $this->newLine();
             return 0;
         }
-        $relation = Schema::getColumnType($table, $field) == 'tinyint' ? 'booleanOptions' : 'options';
+        $relation = in_array(Schema::getColumnType($table, $field) , ['tinyint', 'boolean']) ? 'booleanOptions' : 'options';
         if (!method_exists($this->model::class, $relation)) {
             $this->alert("You need to add a $relation relationship to the model ".$this->model::class);
             return 0;

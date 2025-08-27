@@ -33,10 +33,10 @@ and create the necessary relationships and tables in the database as described b
     </tr>
     <tr>
         <td>
-            public array $optionFields = [ ]; <br>
+            private array $optionFields = [ ]; <br>
             &nbsp;&nbsp; <i>*in it, list the fields that you want to use for the option.</i>  <br>
             <br>
-            public array $optionCasts = [ <br>
+            private array $optionCasts = [ <br>
             &nbsp;&nbsp; '{nameField}' => 'array', <br>
             &nbsp;&nbsp; '{nameField}' => 'boolean', <br>
             &nbsp;&nbsp; '{nameField}' => 'int', <br>
@@ -96,7 +96,7 @@ and create the necessary relationships and tables in the database as described b
     </tr>
     <tr>
         <td>
-            public array $toggleFields = [ ]; <br>
+            private array $toggleFields = [ ]; <br>
             &nbsp;&nbsp; <i>*in it, list the fields that you want to use for the option.</i>  <br>
         </td>
     </tr>
