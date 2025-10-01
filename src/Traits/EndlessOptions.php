@@ -55,15 +55,24 @@ use Illuminate\Database\Eloquent\Builder;
 
 trait EndlessOptions
 {
-    private array $afterCreation = [];
-    private array $afterUpdating = [];
+    private array $afterData = [];
 
-    protected static function booted()
+    protected static function booted(): void
     {
-        self::created(function ($model) {
-            foreach ($model->afterCreation as $action => $dates) {
-                foreach ($dates as $date) {
-                    $model->$action()->create($date);
+        self::saved(function ($model) {
+            foreach ($model->afterData as $action => $data) {
+                $isConvert = $action == 'options' && isset($model->optionCasts);
+                foreach ($data as $datum) {
+                    if ($isConvert) {
+                        $field = $datum['name'];
+                        $value = $datum['value'];
+                        $cast = $model->optionCasts[$field] ?? null;
+                        if (!is_null($cast)) {
+                            $value = $model->convertingField($cast, $value);
+                        }
+                        $datum['value'] = $value;
+                    }
+                    $model->$action()->create($datum);
                 }
             }
         });
@@ -105,7 +114,7 @@ trait EndlessOptions
                 }
             } else {
                 $keyForAfter = $toggle ? 'booleanOptions' : 'options';
-                $this->afterCreation[$keyForAfter][] = ['name' => $key, 'value' => $value];
+                $this->afterData[$keyForAfter][] = ['name' => $key, 'value' => $value];
             }
             return $this;
         } else {
@@ -188,10 +197,10 @@ trait EndlessOptions
         if ($option = $this->booleanOptions->where('name', $field)->first()) {
             $option->update(['value' => $value]);
         } else {
-            $this->booleanOptions()->create(['name' => $field, 'value' => $value]);
-            $this->refresh();
+            $this->afterData['booleanOptions'][] = ['name' => $field, 'value' => $value];
+            $this->updated_at = now();
         }
-        if ($fromValue !== $this->$field) {
+        if ($fromValue !== $value) {
             $this->changes = array_merge($this->changes, [$field => $fromValue]);
         }
     }
@@ -201,22 +210,17 @@ trait EndlessOptions
         if (isset($this->optionCasts)) {
             $cast = $this->optionCasts[$field] ?? null;
             if (!is_null($cast)) {
-                $value = match ($cast) {
-                    'array' => json_encode($value),
-                    'boolean' => (bool) $value,
-                    'int' => (int) $value,
-                    default => $value,
-                };
+                $value = $this->convertingField($cast, $value);
             }
         }
         $fromValue = $this->$field;
         if ($option = $this->options->where('name', $field)->first()) {
             $option->update(['value' => $value]);
         } else {
-            $this->options()->create(['name' => $field, 'value' => $value]);
-            $this->refresh();
+            $this->afterData['options'][] = ['name' => $field, 'value' => $value];
+            $this->updated_at = now();
         }
-        if ($fromValue !== $this->$field) {
+        if ($fromValue !== $value) {
             $this->changes = array_merge($this->changes, [$field => $fromValue]);
         }
     }
@@ -240,6 +244,16 @@ trait EndlessOptions
             '~', '~*', '!~', '!~*', 'similar to',
             'not similar to', 'not ilike', '~~*', '!~~*',
         ];
+    }
+
+    private function convertingField(string $cast, mixed $value): mixed
+    {
+        return match ($cast) {
+            'array' => json_encode($value),
+            'boolean' => (bool) $value,
+            'int' => (int) $value,
+            default => $value,
+        };
     }
 
 }
