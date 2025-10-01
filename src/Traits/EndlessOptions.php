@@ -58,9 +58,8 @@ trait EndlessOptions
     private array $afterCreation = [];
     private array $afterUpdating = [];
 
-    public static function boot(): void
+    protected static function booted()
     {
-        parent::boot();
         self::created(function ($model) {
             foreach ($model->afterCreation as $action => $dates) {
                 foreach ($dates as $date) {
